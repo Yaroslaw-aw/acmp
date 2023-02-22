@@ -53,93 +53,85 @@ namespace acmp
                     {
                         break;
                     }
-
-                    Console.Write($"{_array[i]} ");
                 }
-                Console.WriteLine($"\nштраф пятикурсника: {sum_sum5}," +
-                    $" задачи пятикурсника {count5}," +
-                    $"\nштраф третьекурсника: {sum_sum3}, задачи третьекурсника {count3}");
                 return (sum_sum5, sum_sum3, count5, count3);
             }
 
-            void sort_to_max(int[] _tasks)
-            {
-                int lehgth = _tasks.Length;
-                int max_index, max, length2 = lehgth, temp;
+             void sort_to_max(int[] _tasks)
+             {
+                 int length = _tasks.Length;
+                 int max_index, max, length2 = length, temp;
 
-                for (int i = 0; i < length2 - 1; i++)
-                {
-                    max_index = _tasks.Length - 1;
-                    max = _tasks[_tasks.Length - 1];
+                 for (int i = 0; i < length2 - 1; i++)
+                 {
+                     max_index = length - 1;
+                     max = _tasks[length - 1];
 
-                    for (int j = 0; j < lehgth; j++)
-                    {
-                        if (_tasks[j] > max)
-                        {
-                            max = _tasks[j];
-                            max_index = j;
-                        }
+                     for (int j = 0; j < length; j++)
+                     {
+                         if (_tasks[j] > max)
+                         {
+                             max = _tasks[j];
+                             max_index = j;
+                         }
 
-                    }
-                    temp = _tasks[lehgth - 1];
-                    _tasks[lehgth - 1] = _tasks[max_index];
-                    _tasks[max_index] = temp;
+                     }
+                     temp = _tasks[length - 1];
+                     _tasks[length - 1] = _tasks[max_index];
+                     _tasks[max_index] = temp;
+                    
+                    length--;
 
-                    lehgth--;
+                 }
+             }
 
-                }
-            }
+             (int sum1, int count1) result_1(int[] _tasks)
+             {
+                 int sum1 = 0, count1 = 0, sum_sum1 = 0;
 
-            (int sum1, int count1) result_1(int[] _tasks)
-            {
-                int sum1 = 0, count1 = 0, sum_sum1 = 0;
+                 for (int i = 0; i < _tasks.Length; i++)
+                 {
+                     sum1 += _tasks[i];
 
-                for (int i = 0; i < _tasks.Length; i++)
-                {
-                    sum1 += _tasks[i];
+                     if (sum_sum1 + sum1 <= 300)
+                     {
+                         sum_sum1 += sum1;
+                         count1++;
+                     }
 
-                    if (sum_sum1 + sum1 <= 300)
-                    {
-                        sum_sum1 += sum1;
-                        count1++;
-                    }
-
-                    if (sum_sum1 > 300)
-                    {
-                        break;
-                    }
-                }
-                return (sum_sum1, count1);
-            }
-
-
+                     if (sum_sum1 > 300)
+                     {
+                         break;
+                     }
+                 }
+                 return (sum_sum1, count1);
+             }            
 
             int N = new Random().Next(1, 11);
 
             int[] tasks = array(N);
+                        
 
-            int length = tasks.Length;                          
-                                       
+            var tasks_5_3 = result_5_3(tasks);           
+            
 
-
-            var tasks_5_3 = result_5_3(tasks);            
-
-            sort_to_max(tasks);
+            sort_to_max(tasks);                    
+                       
 
             var tasks_1 = result_1(tasks);
 
             int sum5 = tasks_5_3.sum5, count5 = tasks_5_3.count5,
-                sum3 = tasks_5_3.sum3, count3 = tasks_5_3.count3;            
+                sum3 = tasks_5_3.sum3, count3 = tasks_5_3.count3;
 
             int sum1 = tasks_1.sum1, count1 = tasks_1.count1;
 
             int winner = 1;
 
-            if (count3 > count1 || count3 == count1 && sum3 < sum1 )
+            if (count3 > count1 || count3 == count1 && sum3 < sum1)
             {
                 winner = 3;
             }
-            if (count5 > count1 || count5 == count1 && sum5 < sum1 )
+            if (count5 > count1 || count5 == count1 && sum5 < sum1)
             {
                 winner = 5;
             }
