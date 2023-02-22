@@ -74,14 +74,12 @@ namespace acmp
                              max = _tasks[j];
                              max_index = j;
                          }
-
                      }
                      temp = _tasks[length - 1];
                      _tasks[length - 1] = _tasks[max_index];
                      _tasks[max_index] = temp;
                     
                     length--;
-
                  }
              }
 
@@ -109,15 +107,12 @@ namespace acmp
 
             int N = new Random().Next(1, 11);
 
-            int[] tasks = array(N);
-                        
+            int[] tasks = array(N);                        
 
-            var tasks_5_3 = result_5_3(tasks);           
+            var tasks_5_3 = result_5_3(tasks);          
             
-
-            sort_to_max(tasks);                    
-                       
-
+            sort_to_max(tasks);                   
+                      
             var tasks_1 = result_1(tasks);
 
             int sum5 = tasks_5_3.sum5, count5 = tasks_5_3.count5,
